@@ -1,0 +1,37 @@
+.icon-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+.icon-chip .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.gallery-tile {
+    transition: transform 0.2s ease;
+}
+.gallery-tile:hover {
+    transform: scale(1.02);
+}
+
+.gallery-overlay {
+    background-color: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.gallery-tile:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Always show a light overlay on touch devices since :hover isn't reliable */
+@media (hover: none) {
+    .gallery-overlay {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+}

@@ -1,0 +1,23 @@
+body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .nav-item.active {
+            background-color: theme('colors.secondary-container');
+            color: theme('colors.on-secondary-container');
+            border-left-width: 4px;
+            border-color: theme('colors.secondary');
+        }
+
+        /* Sidebar now holds many categories - make the scroll area obvious but unobtrusive */
+        #sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: theme('colors.outline-variant') transparent;
+        }
+        #sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        #sidebar::-webkit-scrollbar-thumb {
+            background-color: theme('colors.outline-variant');
+            border-radius: 999px;
+        }
+        #sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
