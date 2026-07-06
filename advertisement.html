@@ -1,0 +1,419 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PrintPrecision - Advertising Products</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style/product.css" />
+    <link rel="stylesheet" href="style/advertisement.css" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#00fbfb",
+              primary: "#000000",
+              "tertiary-fixed": "#ffd7f5",
+              "surface-container": "#edeeef",
+              "on-surface": "#191c1d",
+              "tertiary-container": "#380038",
+              "surface-container-low": "#f3f4f5",
+              "surface-dim": "#d9dadb",
+              "primary-fixed-dim": "#bfc2ff",
+              "primary-fixed": "#e0e0ff",
+              "on-primary-fixed-variant": "#3b4083",
+              error: "#ba1a1a",
+              "surface-container-high": "#e7e8e9",
+              "surface-bright": "#f8f9fa",
+              "on-error-container": "#93000a",
+              "primary-container": "#0d1056",
+              "on-secondary-container": "#006e6e",
+              "on-secondary": "#ffffff",
+              surface: "#f8f9fa",
+              "on-tertiary-fixed-variant": "#810081",
+              "tertiary-fixed-dim": "#ffabf3",
+              "surface-variant": "#e1e3e4",
+              "secondary-fixed-dim": "#00dddd",
+              "inverse-on-surface": "#f0f1f2",
+              "on-primary-fixed": "#0d1056",
+              "on-background": "#191c1d",
+              "on-secondary-fixed-variant": "#004f4f",
+              "secondary-container": "#00f8f8",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed": "#380038",
+              "on-tertiary-container": "#e800e8",
+              outline: "#777681",
+              "on-surface-variant": "#464650",
+              secondary: "#006a6a",
+              "inverse-primary": "#bfc2ff",
+              "on-primary-container": "#797ec5",
+              "surface-tint": "#53589c",
+              "error-container": "#ffdad6",
+              "outline-variant": "#c7c5d2",
+              "on-secondary-fixed": "#002020",
+              background: "#f8f9fa",
+              tertiary: "#000000",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#e1e3e4",
+              "inverse-surface": "#2e3132",
+              "on-tertiary": "#ffffff",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              md: "1.5rem",
+              lg: "2.5rem",
+              "margin-desktop": "2.5rem",
+              xl: "4rem",
+              "max-width": "1280px",
+              "margin-mobile": "1rem",
+              sm: "1rem",
+              xs: "0.5rem",
+              unit: "4px",
+              gutter: "1.5rem",
+            },
+            fontFamily: {
+              "headline-md": ["Montserrat"],
+              "headline-lg-mobile": ["Montserrat"],
+              "body-md": ["Inter"],
+              "body-lg": ["Inter"],
+              display: ["Montserrat"],
+              "label-bold": ["Inter"],
+              "headline-lg": ["Montserrat"],
+              "label-sm": ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "1.3",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg-mobile": [
+                "24px",
+                {
+                  lineHeight: "1.2",
+                  fontWeight: "800",
+                },
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "1.5",
+                  fontWeight: "400",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "1.6",
+                  fontWeight: "400",
+                },
+              ],
+              display: [
+                "48px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+              "label-bold": [
+                "14px",
+                {
+                  lineHeight: "1.4",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "1.2",
+                  fontWeight: "800",
+                },
+              ],
+              "label-sm": [
+                "12px",
+                {
+                  lineHeight: "1.4",
+                  fontWeight: "500",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="min-h-screen flex flex-col font-body-md text-body-md bg-background text-on-background overflow-x-hidden"
+  >
+    <!-- TopNavBar -->
+       <nav
+      class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant"
+    >
+      <div
+        class="flex justify-between items-center px-margin-desktop h-20 max-w-max-width mx-auto"
+      >
+        <div
+          class="text-headline-md font-headline-md font-extrabold text-primary tracking-tighter flex items-center gap-2"
+        >
+          <img
+            src="logo.png"
+            alt="MD Printing Press"
+            class="h-14 md:h-20 w-auto object-contain flex-shrink-0"
+          />
+        </div>
+        <div class="hidden md:flex gap-gutter items-center">
+          <a
+            class="text-secondary font-bold border-b-2 border-secondary pb-1 text-label-bold font-label-bold transition-transform duration-150 scale-95"
+            href="#"
+            >Home</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
+            href="about.html"
+            >About</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
+            href="product.html"
+            >Products</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
+            href="advertisement.html"
+            >Advertising</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
+            href="#"
+            >Contact</a
+          >
+        </div>
+        <button
+          class="js-open-quote-modal hidden md:block bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+        >
+          Get a Quote
+        </button>
+        <button class="md:hidden text-primary">
+          <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+      </div>
+    </nav>
+    <!-- Mobile sidebar overlay -->
+    <div
+      class="fixed inset-0 bg-black/40 z-30 hidden md:hidden"
+      id="sidebar-overlay"
+      onclick="toggleSidebar(false)"
+    ></div>
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-16 flex max-w-max-width mx-auto w-full min-w-0">
+      <!-- SideNavBar -->
+      <aside
+        class="fixed md:sticky top-16 left-0 z-40 flex flex-col bg-surface-container-low text-primary font-Inter text-label-bold h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-outline-variant py-md gap-xs select-none overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
+        id="sidebar"
+      >
+        <div class="px-md mb-md">
+          <div class="flex items-center gap-xs mb-xs text-primary font-bold">
+            <span
+              class="material-symbols-outlined"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >campaign</span
+            >
+            <span class="font-headline-md text-headline-md-mobile"
+              >Advertising</span
+            >
+          </div>
+          <div class="text-label-sm text-on-surface-variant">
+            Select a product type
+          </div>
+        </div>
+        <nav class="flex flex-col gap-xs w-full" id="sidebar-nav"></nav>
+      </aside>
+      <!-- Product Content Panel -->
+      <section class="flex-grow min-w-0 p-sm sm:p-lg overflow-y-auto">
+        <div class="max-w-5xl mx-auto">
+          <header class="mb-lg">
+            <h1
+              class="font-display text-3xl sm:text-4xl md:text-display text-primary mb-xs"
+              id="product-title"
+            >
+              Flex Banner
+            </h1>
+            <p
+              class="font-body-lg text-base md:text-body-lg text-on-surface-variant"
+              id="product-subtitle"
+            >
+              Loading...
+            </p>
+          </header>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-lg mb-2xl">
+            <div
+              class="rounded-xl overflow-hidden border border-outline-variant bg-surface-container-low aspect-video lg:aspect-square"
+              id="hero-tile"
+            ></div>
+            <div class="flex flex-col justify-between">
+              <div>
+                <h3
+                  class="font-headline-md text-headline-md text-primary mb-sm"
+                >
+                  Technical Specifications
+                </h3>
+                <ul
+                  class="grid grid-cols-1 sm:grid-cols-2 gap-x-md gap-y-xs font-label-sm text-label-sm text-on-surface mb-lg"
+                  id="product-specs"
+                ></ul>
+                <h3
+                  class="font-headline-md text-headline-md text-primary mb-sm"
+                >
+                  Description
+                </h3>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant mb-lg"
+                  id="product-desc"
+                ></p>
+              </div>
+              <div class="mt-auto pt-md border-t border-outline-variant">
+                <button
+                  class="w-full bg-primary-container text-on-primary font-label-bold py-sm rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary-container"
+                >
+                  Request Quote for this Product
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Gallery -->
+          <div class="text-center mb-lg">
+            <h2
+              class="font-display text-2xl sm:text-3xl text-primary"
+              id="gallery-title"
+            >
+              Flex Banner Printing
+            </h2>
+            <div class="w-16 h-1 bg-secondary mx-auto mt-xs rounded-full"></div>
+          </div>
+          <div
+            class="grid grid-cols-2 md:grid-cols-3 gap-sm sm:gap-md mb-2xl"
+            id="product-gallery"
+          ></div>
+        </div>
+      </section>
+    </main>
+    <!-- 7. Footer & Contact -->
+
+    <footer
+      class="w-full pt-xl pb-md bg-surface-container-highest border-t border-outline-variant"
+    >
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-xl px-margin-desktop max-w-max-width mx-auto mb-12"
+      >
+        <!-- Left Footer -->
+        <div>
+          <div
+            class="text-headline-md font-headline-md font-extrabold text-on-surface-variant mb-6 flex items-center gap-2"
+          >
+            <img
+              src="logo.png"
+              alt="MD Printing Press"
+              class="h-14 md:h-20 w-auto object-contain flex-shrink-0"
+            />
+            MD Printing Press
+          </div>
+          <p
+            class="text-body-md font-body-md text-on-surface-variant mb-8 max-w-md"
+          >
+            High-fidelity commercial solutions. Engineering perfect impressions
+            for modern businesses across the globe.
+          </p>
+          <div class="flex gap-4 mb-8">
+            <a
+              class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-secondary hover:text-on-secondary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">share</span>
+            </a>
+            <a
+              class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-secondary hover:text-on-secondary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">work</span>
+            </a>
+            <a
+              class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-secondary hover:text-on-secondary transition-colors"
+              href="#"
+            >
+              <span class="material-symbols-outlined">photo_camera</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <a
+              class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:underline transition-all focus:ring-2 focus:ring-secondary"
+              href="#"
+              >About us</a
+            >
+            <a
+              class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:underline transition-all focus:ring-2 focus:ring-secondary"
+              href="product.html"
+              >Products</a
+            >
+            <a
+              class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:underline transition-all focus:ring-2 focus:ring-secondary"
+              href="advertisement.html"
+              >Advertising</a
+            >
+            <a
+              class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:underline transition-all focus:ring-2 focus:ring-secondary"
+              href="#contactForm"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+        <!-- Right Footer: Form -->
+        <div
+          class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant shadow-sm flex flex-col justify-center"
+        >
+          <h3 class="text-headline-md font-headline-md text-primary mb-3">
+            Have a Project in Mind?
+          </h3>
+          <p class="text-body-md font-body-md text-on-surface-variant mb-6">
+            Tell us what you need and we'll get back to you with a tailored
+            quote — usually within one business day.
+          </p>
+          <button
+            class="js-open-quote-modal w-full bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+          >
+            Get a Quote
+          </button>
+        </div>
+      </div>
+      <div
+        class="text-center mt-12 border-t border-outline-variant pt-6 px-margin-desktop"
+      >
+        <p class="text-label-sm font-label-sm text-on-surface-variant">
+          © 2026 MD Printing Press. All rights reserved. High-fidelity
+          commercial solutions.
+        </p>
+      </div>
+    </footer>
+    <script src="js/advertisement.js"></script>
+  </body>
+</html>
