@@ -1,4 +1,31 @@
-   // ===================== Get a Quote Modal =====================
+// ===================== Mobile Nav Menu =====================
+        (function () {
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            const menuIcon = document.getElementById('mobileMenuIcon');
+            const navPanel = document.getElementById('mobileNavPanel');
+            if (!menuBtn || !navPanel) return;
+
+            let menuOpen = false;
+
+            function setMenu(open) {
+                menuOpen = open;
+                navPanel.classList.toggle('hidden', !open);
+                menuBtn.setAttribute('aria-expanded', String(open));
+                if (menuIcon) menuIcon.textContent = open ? 'close' : 'menu';
+            }
+
+            menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+
+            navPanel.querySelectorAll('.js-mobile-nav-link').forEach((el) => {
+                el.addEventListener('click', () => setMenu(false));
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && menuOpen) setMenu(false);
+            });
+        })();
+
+        // ===================== Get a Quote Modal =====================
         (function () {
             const overlay = document.getElementById('quoteModalOverlay');
             const modalBox = document.getElementById('quoteModalBox');

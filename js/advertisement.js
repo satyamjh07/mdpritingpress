@@ -121,25 +121,6 @@ function slugify(name) {
   return name.toLowerCase().trim().replace(/\s+/g, "_");
 }
 
-function renderSidebar() {
-  const nav = document.getElementById("sidebar-nav");
-  nav.innerHTML = "";
-  Object.keys(advertisementData).forEach((key, index) => {
-    const data = advertisementData[key];
-    const btn = document.createElement("button");
-    btn.id = "nav-" + slugify(key);
-    btn.className =
-      "nav-item flex items-center gap-sm px-md py-xs text-left w-full hover:pl-lg transition-all duration-150 text-on-surface-variant hover:bg-surface-container-high" +
-      (index === 0 ? " active" : "");
-    btn.innerHTML = `<span class="material-symbols-outlined">${data.icon}</span><span class="truncate">${key}</span>`;
-    btn.addEventListener("click", () => {
-      updateContent(key);
-      if (window.innerWidth < 768) toggleSidebar(false);
-    });
-    nav.appendChild(btn);
-  });
-}
-
 // Cycles through a few of the theme's tonal palettes so icon chips, the
 // hero tile, and gallery tiles share a consistent, branded color system.
 const TILE_TONES = [
@@ -154,10 +135,6 @@ const CATEGORY_TONE = {};
 Object.keys(advertisementData).forEach((key, index) => {
   CATEGORY_TONE[key] = TILE_TONES[index % TILE_TONES.length];
 });
-
-function slugify(name) {
-  return name.toLowerCase().trim().replace(/\s+/g, "_");
-}
 
 function renderSidebar() {
   const nav = document.getElementById("sidebar-nav");
@@ -321,19 +298,36 @@ function updateContent(category) {
   renderGallery(data);
 }
 
+// Mobile-only main nav links inside the drawer should close the drawer once
+// tapped (anchors navigate away anyway; the in-page "Advertising" link and
+// the "Get a Quote" trigger don't, so this keeps the UI tidy either way).
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMainNav = document.querySelector('aside#sidebar nav[aria-label="Main navigation"]');
+  if (mobileMainNav) {
+    mobileMainNav.querySelectorAll("a, button").forEach((el) => {
+      el.addEventListener("click", () => {
+        if (window.innerWidth < 768) toggleSidebar(false);
+      });
+    });
+  }
+});
+
+let sidebarOpen = false;
 function toggleSidebar(force) {
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("sidebar-overlay");
-  const isOpen = sidebar.classList.contains("translate-x-0");
-  const shouldOpen = force !== undefined ? force : !isOpen;
+  if (!sidebar || !overlay) return;
+
+  const shouldOpen = force !== undefined ? force : !sidebarOpen;
+  sidebarOpen = shouldOpen;
 
   if (shouldOpen) {
-    sidebar.classList.remove("-translate-x-full");
-    sidebar.classList.add("translate-x-0");
+    sidebar.classList.remove("sidebar-closed");
+    sidebar.classList.add("sidebar-open");
     overlay.classList.remove("hidden");
   } else {
-    sidebar.classList.add("-translate-x-full");
-    sidebar.classList.remove("translate-x-0");
+    sidebar.classList.remove("sidebar-open");
+    sidebar.classList.add("sidebar-closed");
     overlay.classList.add("hidden");
   }
 }
@@ -343,3 +337,162 @@ document.addEventListener("DOMContentLoaded", () => {
   const firstCategory = Object.keys(advertisementData)[0];
   updateContent(firstCategory);
 });
+
+// ===================== Get a Quote Modal =====================
+(function () {
+  const overlay = document.getElementById("quoteModalOverlay");
+  const closeBtn = document.getElementById("quoteModalClose");
+  const successCloseBtn = document.getElementById("quoteSuccessClose");
+  const formView = document.getElementById("quoteFormView");
+  const successView = document.getElementById("quoteSuccessView");
+  const quoteForm = document.getElementById("quoteForm");
+  const quoteMsgDiv = document.getElementById("quoteFormMessage");
+  const quoteProductSelect = document.getElementById("quoteProduct");
+  const openTriggers = document.querySelectorAll(".js-open-quote-modal");
+
+  if (!overlay || !quoteForm) return;
+
+  const nameRegex = /^[A-Za-z\s'-]{2,50}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[+]?[0-9]{7,15}$/;
+
+  const quoteFields = [
+    {
+      id: "quoteName",
+      label: "Name",
+      regex: nameRegex,
+      errorMsg: "Please enter a valid name (letters only, 2-50 characters).",
+    },
+    {
+      id: "quoteEmail",
+      label: "Email Address",
+      regex: emailRegex,
+      errorMsg: "Please enter a valid email address.",
+    },
+    {
+      id: "quotePhone",
+      label: "Phone Number",
+      regex: phoneRegex,
+      errorMsg: "Please enter a valid phone number (7-15 digits).",
+    },
+    { id: "quoteProduct", label: "Select Product", errorMsg: "Please select a product." },
+    {
+      id: "quoteQuantity",
+      label: "Expected Order Quantity",
+      errorMsg: "Please select the expected order quantity.",
+    },
+    { id: "quoteState", label: "State", errorMsg: "Please select your state." },
+  ];
+
+  // Build the "Select Product" dropdown straight from advertisementData so
+  // it always lists every category shown on this page.
+  function populateQuoteProductOptions() {
+    if (!quoteProductSelect) return;
+    quoteProductSelect
+      .querySelectorAll("option:not([value=''])")
+      .forEach((opt) => opt.remove());
+
+    Object.keys(advertisementData).forEach((key) => {
+      const opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = advertisementData[key].title || key;
+      quoteProductSelect.appendChild(opt);
+    });
+  }
+
+  function resetQuoteModalView() {
+    formView.classList.remove("hidden");
+    successView.classList.add("hidden");
+    quoteMsgDiv.classList.add("hidden");
+    quoteMsgDiv.classList.remove("bg-error-container", "text-on-error-container");
+    quoteForm.reset();
+    quoteFields.forEach((f) => {
+      document
+        .getElementById(f.id)
+        .classList.remove("border-error", "border-on-tertiary-container", "border-2");
+    });
+  }
+
+  function openQuoteModal() {
+    resetQuoteModalView();
+    overlay.classList.remove("hidden");
+    overlay.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeQuoteModal() {
+    overlay.classList.add("hidden");
+    overlay.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  openTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      openQuoteModal();
+    });
+  });
+
+  closeBtn.addEventListener("click", closeQuoteModal);
+  successCloseBtn.addEventListener("click", closeQuoteModal);
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeQuoteModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !overlay.classList.contains("hidden")) closeQuoteModal();
+  });
+
+  quoteForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let isValid = true;
+    let firstErrorMsg = "";
+
+    quoteFields.forEach((f) =>
+      document
+        .getElementById(f.id)
+        .classList.remove("border-error", "border-on-tertiary-container", "border-2"),
+    );
+
+    for (const field of quoteFields) {
+      const el = document.getElementById(field.id);
+      const value = el.value.trim();
+
+      if (!value) {
+        if (isValid) firstErrorMsg = `Please fill out the ${field.label} field.`;
+        isValid = false;
+        el.classList.add("border-error");
+        continue;
+      }
+
+      if (field.regex && !field.regex.test(value)) {
+        if (isValid) firstErrorMsg = field.errorMsg;
+        isValid = false;
+        el.classList.add("border-error");
+      }
+    }
+
+    quoteMsgDiv.classList.remove("hidden", "bg-error-container", "text-on-error-container");
+
+    if (!isValid) {
+      quoteMsgDiv.textContent = firstErrorMsg;
+      quoteMsgDiv.classList.add("bg-error-container", "text-on-error-container");
+      return;
+    }
+
+    quoteMsgDiv.classList.add("hidden");
+    quoteFields.forEach((f) => {
+      document
+        .getElementById(f.id)
+        .classList.add("border-on-tertiary-container", "border-2");
+    });
+
+    // Simulate successful submission
+    formView.classList.add("hidden");
+    successView.classList.remove("hidden");
+  });
+
+  populateQuoteProductOptions();
+})();

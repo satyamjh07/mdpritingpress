@@ -368,20 +368,37 @@ function updateContent(category) {
   }
 }
 
+// Mobile-only main nav links inside the drawer should close the drawer once
+// tapped (anchors navigate away anyway; the in-page "Products" link and the
+// "Get a Quote" trigger don't, so this keeps the UI tidy either way).
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMainNav = document.querySelector('aside#sidebar nav[aria-label="Main navigation"]');
+  if (mobileMainNav) {
+    mobileMainNav.querySelectorAll("a, button").forEach((el) => {
+      el.addEventListener("click", () => {
+        if (window.innerWidth < 768) toggleSidebar(false);
+      });
+    });
+  }
+});
+
 // Mobile sidebar drawer control
+let sidebarOpen = false;
 function toggleSidebar(force) {
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("sidebar-overlay");
-  const isOpen = sidebar.classList.contains("translate-x-0");
-  const shouldOpen = force !== undefined ? force : !isOpen;
+  if (!sidebar || !overlay) return;
+
+  const shouldOpen = force !== undefined ? force : !sidebarOpen;
+  sidebarOpen = shouldOpen;
 
   if (shouldOpen) {
-    sidebar.classList.remove("-translate-x-full");
-    sidebar.classList.add("translate-x-0");
+    sidebar.classList.remove("sidebar-closed");
+    sidebar.classList.add("sidebar-open");
     overlay.classList.remove("hidden");
   } else {
-    sidebar.classList.add("-translate-x-full");
-    sidebar.classList.remove("translate-x-0");
+    sidebar.classList.remove("sidebar-open");
+    sidebar.classList.add("sidebar-closed");
     overlay.classList.add("hidden");
   }
 }
