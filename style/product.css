@@ -6,6 +6,23 @@ body { background-color: theme('colors.background'); color: theme('colors.on-bac
             border-color: theme('colors.secondary');
         }
 
+        /* Mobile "Categories" drawer.
+           Defined here as plain CSS (not Tailwind utility classes) because the
+           Tailwind CDN build only generates styles for class names it can see
+           written in the static HTML. Since JS toggles these classes at runtime,
+           relying on ad-hoc utility classes like a bare `translate-x-0` (added
+           only via JS, never present in the markup) means Tailwind never
+           generates a rule for it and the drawer silently fails to open/close
+           on mobile. */
+        @media (max-width: 767px) {
+            #sidebar.sidebar-open {
+                transform: translateX(0);
+            }
+            #sidebar.sidebar-closed {
+                transform: translateX(-100%);
+            }
+        }
+
         /* Sidebar now holds many categories - make the scroll area obvious but unobtrusive */
         #sidebar {
             scrollbar-width: thin;
