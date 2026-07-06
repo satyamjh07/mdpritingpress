@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>MD Printing Press | Product</title>
+     <title>MD Printing Press | Product</title>
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
@@ -186,11 +186,11 @@
     class="min-h-screen flex flex-col font-body-md text-body-md bg-background text-on-background overflow-x-hidden"
   >
     <!-- TopNavBar -->
-       <nav
+    <nav
       class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant"
     >
       <div
-        class="flex justify-between items-center px-margin-desktop h-20 max-w-max-width mx-auto"
+        class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 md:h-20 max-w-max-width mx-auto"
       >
         <div
           class="text-headline-md font-headline-md font-extrabold text-primary tracking-tighter flex items-center gap-2"
@@ -202,8 +202,8 @@
           />
         </div>
         <div class="hidden md:flex gap-gutter items-center">
-                   <a
-            class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
+          <a
+            class="text-on-surface-variant font-bold pb-1 font-label-bold transition-transform duration-150 scale-95"
             href="index.html"
             >Home</a
           >
@@ -212,10 +212,10 @@
             href="about.html"
             >About</a
           >
-             <a
-            class="text-secondary font-bold border-b-2 border-secondary pb-1 text-label-bold font-label-bold transition-transform duration-150 scale-95"
-            href="product.html"
-            >Product</a
+          <a
+            class="text-secondary border-secondary border-b-2 text-label-bold hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
+            href="#"
+            >Products</a
           >
           <a
             class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
@@ -228,14 +228,21 @@
             >Contact</a
           >
         </div>
-        <button
-          class="js-open-quote-modal hidden md:block bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
-        >
-          Get a Quote
-        </button>
-        <button class="md:hidden text-primary">
-          <span class="material-symbols-outlined text-3xl">menu</span>
-        </button>
+        <div class="flex items-center gap-sm">
+          <button
+            class="js-open-quote-modal hidden md:block bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+          >
+            Get a Quote
+          </button>
+          <button
+            class="md:hidden text-primary"
+            id="mobile-menu-btn"
+            onclick="toggleSidebar()"
+            aria-label="Toggle menu"
+          >
+            <span class="material-symbols-outlined text-3xl">menu</span>
+          </button>
+        </div>
       </div>
     </nav>
     <!-- Mobile sidebar overlay -->
@@ -248,9 +255,47 @@
     <main class="flex-grow pt-16 flex max-w-max-width mx-auto w-full min-w-0">
       <!-- SideNavBar -->
       <aside
-        class="fixed md:sticky top-16 left-0 z-40 flex flex-col bg-surface-container-low text-primary font-Inter text-label-bold h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-outline-variant py-md gap-xs select-none overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out"
+        class="fixed md:sticky top-16 left-0 z-40 flex flex-col bg-surface-container-low text-primary font-Inter text-label-bold h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-outline-variant py-md gap-xs select-none overflow-y-auto transform md:translate-x-0 transition-transform duration-300 ease-in-out sidebar-closed"
         id="sidebar"
       >
+        <!-- Mobile-only: main site navigation, since Home/About/Advertising/
+             Contact are hidden on small screens up top. Desktop keeps using
+             the links in the TopNavBar instead, so this is hidden at md+. -->
+        <nav
+          class="md:hidden flex flex-col gap-xs w-full px-md pb-md mb-md border-b border-outline-variant"
+          aria-label="Main navigation"
+        >
+          <a
+            class="px-2 py-2 rounded text-label-bold font-label-bold text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="px-2 py-2 rounded text-label-bold font-label-bold text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors"
+            href="about.html"
+            >About</a
+          >
+          <a
+            class="px-2 py-2 rounded text-label-bold font-label-bold text-secondary bg-secondary-container"
+            href="#"
+            >Products</a
+          >
+          <a
+            class="px-2 py-2 rounded text-label-bold font-label-bold text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors"
+            href="advertisement.html"
+            >Advertising</a
+          >
+          <a
+            class="px-2 py-2 rounded text-label-bold font-label-bold text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors"
+            href="#"
+            >Contact</a
+          >
+          <button
+            class="js-open-quote-modal mt-1 bg-primary-container text-on-primary font-label-bold py-2 rounded-lg hover:bg-on-primary-fixed-variant transition-colors"
+          >
+            Get a Quote
+          </button>
+        </nav>
         <div class="px-md mb-md">
           <div class="flex items-center gap-xs mb-xs text-primary font-bold">
             <span class="material-symbols-outlined"> list </span>
@@ -438,21 +483,70 @@
           </div>
         </div>
         <!-- Right Footer: Form -->
-          <div
-          class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant shadow-sm flex flex-col justify-center"
+        <div
+          class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant shadow-sm"
         >
-          <h3 class="text-headline-md font-headline-md text-primary mb-3">
-            Have a Project in Mind?
+          <h3 class="text-headline-md font-headline-md text-primary mb-6">
+            Request Technical Specs
           </h3>
-          <p class="text-body-md font-body-md text-on-surface-variant mb-6">
-            Tell us what you need and we'll get back to you with a tailored
-            quote — usually within one business day.
-          </p>
-          <button
-            class="js-open-quote-modal w-full bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
-          >
-            Get a Quote
-          </button>
+          <div
+            class="hidden mb-4 p-3 rounded-lg text-label-bold font-label-bold"
+            id="formMessage"
+          ></div>
+          <form class="space-y-4" id="contactForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                  >Name</label
+                >
+                <input
+                  class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none"
+                  id="fieldName"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                  >Phone</label
+                >
+                <input
+                  class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none"
+                  id="fieldPhone"
+                  type="tel"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                >Email</label
+              >
+              <input
+                class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none"
+                id="fieldEmail"
+                type="email"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                >Project Details</label
+              >
+              <textarea
+                class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none resize-none"
+                id="fieldMessage"
+                rows="3"
+              ></textarea>
+            </div>
+            <button
+              class="w-full bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+              type="submit"
+            >
+              Submit Inquiry
+            </button>
+          </form>
         </div>
       </div>
       <div

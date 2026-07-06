@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>MD Printing Press</title>
+   <title>MD Printing Press</title>
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
@@ -183,9 +183,54 @@
         >
           Get a Quote
         </button>
-        <button class="md:hidden text-primary">
-          <span class="material-symbols-outlined text-3xl">menu</span>
+        <button
+          class="md:hidden text-primary"
+          id="mobileMenuBtn"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span class="material-symbols-outlined text-3xl" id="mobileMenuIcon"
+            >menu</span
+          >
         </button>
+      </div>
+      <!-- Mobile Nav Panel -->
+      <div
+        class="hidden md:hidden bg-surface-container-lowest border-t border-outline-variant px-margin-mobile py-sm"
+        id="mobileNavPanel"
+      >
+        <div class="flex flex-col gap-1">
+          <a
+            class="js-mobile-nav-link text-secondary font-bold px-2 py-3 rounded text-label-bold font-label-bold"
+            href="#"
+            >Home</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="about.html"
+            >About</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="product.html"
+            >Products</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="advertisement.html"
+            >Advertising</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="#"
+            >Contact</a
+          >
+          <button
+            class="js-open-quote-modal js-mobile-nav-link mt-2 bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+          >
+            Get a Quote
+          </button>
+        </div>
       </div>
     </nav>
     <!-- 2. Hero Section -->
@@ -1032,21 +1077,70 @@
           </div>
         </div>
         <!-- Right Footer: Form -->
-  <div
-          class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant shadow-sm flex flex-col justify-center"
+        <div
+          class="bg-surface-container-lowest p-8 rounded-lg border border-outline-variant shadow-sm"
         >
-          <h3 class="text-headline-md font-headline-md text-primary mb-3">
-            Have a Project in Mind?
+          <h3 class="text-headline-md font-headline-md text-primary mb-6">
+            Request Technical Specs
           </h3>
-          <p class="text-body-md font-body-md text-on-surface-variant mb-6">
-            Tell us what you need and we'll get back to you with a tailored
-            quote — usually within one business day.
-          </p>
-          <button
-            class="js-open-quote-modal w-full bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
-          >
-            Get a Quote
-          </button>
+          <div
+            class="hidden mb-4 p-3 rounded-lg text-label-bold font-label-bold"
+            id="formMessage"
+          ></div>
+          <form class="space-y-4" id="contactForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                  >Name</label
+                >
+                <input
+                  class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none"
+                  id="fieldName"
+                  type="text"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                  >Phone</label
+                >
+                <input
+                  class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none"
+                  id="fieldPhone"
+                  type="tel"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                >Email</label
+              >
+              <input
+                class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none"
+                id="fieldEmail"
+                type="email"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-label-sm font-label-sm text-on-surface-variant mb-1"
+                >Project Details</label
+              >
+              <textarea
+                class="w-full bg-surface border border-outline-variant rounded p-2 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors outline-none resize-none"
+                id="fieldMessage"
+                rows="3"
+              ></textarea>
+            </div>
+            <button
+              class="w-full bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+              type="submit"
+            >
+              Submit Inquiry
+            </button>
+          </form>
         </div>
       </div>
       <div

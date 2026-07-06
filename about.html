@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-   <title>MD Printing Press | About</title>
+     <title>MD Printing Press | About</title>
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
@@ -157,7 +157,7 @@
           <a
           class="text-secondary font-bold border-b-2 border-secondary pb-1 text-label-bold font-label-bold transition-transform duration-150 scale-95"
           href="about.html"
-            >Abut</a
+            >About</a
           >
           <a
             class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-1 rounded text-label-bold font-label-bold"
@@ -180,9 +180,54 @@
         >
           Get a Quote
         </button>
-        <button class="md:hidden text-primary">
-          <span class="material-symbols-outlined text-3xl">menu</span>
+        <button
+          class="md:hidden text-primary"
+          id="mobileMenuBtn"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span class="material-symbols-outlined text-3xl" id="mobileMenuIcon"
+            >menu</span
+          >
         </button>
+      </div>
+      <!-- Mobile Nav Panel -->
+      <div
+        class="hidden md:hidden bg-surface-container-lowest border-t border-outline-variant px-margin-mobile py-sm"
+        id="mobileNavPanel"
+      >
+        <div class="flex flex-col gap-1">
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="js-mobile-nav-link text-secondary font-bold px-2 py-3 rounded text-label-bold font-label-bold"
+            href="about.html"
+            >About</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="product.html"
+            >Products</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="advertisement.html"
+            >Advertising</a
+          >
+          <a
+            class="js-mobile-nav-link text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-2 py-3 rounded text-label-bold font-label-bold"
+            href="#"
+            >Contact</a
+          >
+          <button
+            class="js-open-quote-modal js-mobile-nav-link mt-2 bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-on-primary-fixed-variant transition-colors border-b-2 border-primary border-opacity-30 active:translate-y-px active:border-b-0"
+          >
+            Get a Quote
+          </button>
+        </div>
       </div>
     </nav>
 
